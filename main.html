@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Price Modifier</title>
+    <script>
+      function modify_price(price) {
+        var integer_part = parseInt(price);
+
+        // 如果個位數和十位數的組合小於50，將十位數設為8
+        // 否則，進位到下一個百位，將十位數設為2
+        if (integer_part % 100 < 50) {
+          var modified_integer = Math.floor(integer_part / 100) * 100 + 80;
+        } else {
+          var modified_integer =
+            (Math.floor(integer_part / 100) + 1) * 100 + 20;
+        }
+
+        return modified_integer;
+      }
+
+      function calculate() {
+        var price = document.getElementById("price").value;
+        var result = modify_price(price);
+        document.getElementById("result").innerText =
+          "Modified price: " + result;
+      }
+    </script>
+  </head>
+  <body>
+    <input type="number" id="price" placeholder="Enter price" />
+    <button onclick="calculate()">Calculate</button>
+    <p id="result"></p>
+  </body>
+</html>
