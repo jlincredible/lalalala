@@ -1,85 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>報價計算器</title>
+    <title>twelvepcutieの報價計算器</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
+            margin: 0;
+            padding: 20px;
             font-family: 'Arial', sans-serif;
-            background-color: #f8f8f8;
-            margin: auto;
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: #f1dfe3;
+            color: #333;
+
+
+
+
         }
 
         .container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            margin: 0 auto;
             max-width: 400px;
+            background-color: #ecd3d7;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
             box-sizing: border-box;
         }
 
-        label {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 8px;
-            display: block;
-        }
 
-        input {
-            padding: 10px;
-            margin-bottom: 16px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type="radio"] {
-            margin-right: 4px;
-        }
 
         button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1em;
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 1.2em;
             border: none;
             cursor: pointer;
             border-radius: 4px;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #27ae60;
+        }
+
+        .form-floating label {
+            color: #e09d9b;
+            /* 你想要的顏色 */
+        }
+
+        /* 修改下拉選單選項的字體顏色 */
+        .form-floating select option {
+            color: #e09d9b;
+            /* 你想要的顏色 */
+        }
+
+
+        label {
+            font-size: 1.2em;
+            font-family: 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+            font-weight: bold;
+            /* 設定為粗體 */
+            color: #e09d9b;
+            margin-bottom: 8px;
+            display: block;
+            margin-right: 1px;
+            /* 在單選按鈕和標籤之間添加一些間距 */
+        }
+
+
+
+
+        label {
+            display: inline-block;
+            margin-bottom: 8px;
+            /* 為了在兩個單選按鈕之間添加一些垂直間距 */
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+
+        input:focus {
+            border-color: #2980b9;
         }
 
         #quotationResult {
             font-size: 1.2em;
             margin-top: 16px;
-            color: #333;
+            font-weight: bold;
+            color: #f37c78;
         }
     </style>
 </head>
+
 <body>
-    <label for="priceInput">請輸入價格：</label>
-    <input type="text" id="priceInput" placeholder="輸入價格">
-    
-    <br>
+    <div class="form-floating">
+        <label for="floatingSelect">商品類別</label>
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+            <option value="other" selected>包包之外的可愛東東</option>
+            <option value="bag">包包類的東東</option>
+        </select>
 
-    <input type="radio" name="productType" value="bag" id="bagType" checked>
-    <label for="bagType">包包</label>
-
-    <input type="radio" name="productType" value="other" id="otherType">
-    <label for="otherType">可愛的東東</label>
+    </div>
 
     <br>
 
-    <button onclick="calculateQuotation()">計算</button>
+    <label for="priceInput">Jellycat官網價格</label>
+    <input type="text" id="priceInput" placeholder="輸入價格(€)">
+
+    <br>
+
+    <button onclick="calculateQuotation()">按下去會有報價呦</button>
 
     <!-- 新增用於顯示報價價格的元素 -->
     <div id="quotationResult"></div>
@@ -105,7 +148,7 @@
             }
 
             let quotationPrice;
-            let productType = document.querySelector('input[name="productType"]:checked').value;
+            let productType = document.getElementById('floatingSelect').value;
 
             if (productType === 'bag') {
                 // 包包類別
@@ -125,8 +168,9 @@
 
             // 將結果顯示在頁面上
             let resultElement = document.getElementById('quotationResult');
-            resultElement.innerHTML = `報價價格：${modifiedPrice} 台幣`;
+            resultElement.innerHTML = `甜甜代購價：${modifiedPrice} 台幣`;
         }
     </script>
 </body>
+
 </html>
